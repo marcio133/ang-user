@@ -1,0 +1,68 @@
+<section  class="container-fluid main-table">
+  <header class="main-table-header">
+    <h1 class="table-header--title">Users</h1>
+  </header>
+
+  <div [hidden]="isLoading">
+    <table *ngIf="!hasError" mat-table matSort [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let user"> {{ user.id }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let user"> {{ user.name }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Username </th>
+        <td mat-cell *matCellDef="let user"> {{ user.username }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let user"> {{ user.email }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let user"> {{ user.address.city }} - {{ user.address.street }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let user"> {{ user.phone }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="website">
+        <th mat-header-cell *matHeaderCellDef> Website </th>
+        <td mat-cell *matCellDef="let user"> {{ user.website }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="company">
+        <th mat-header-cell *matHeaderCellDef> Company </th>
+        <td mat-cell *matCellDef="let user"> {{ user.company.name }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let user">
+          <button mat-raised-button class="button-edit" (click)="onClickEdit(user)">
+            <mat-icon aria-hidden="false" aria-label="Edit User">edit</mat-icon>
+          </button>
+          <button mat-raised-button color="warn" (click)="onClickDelete(user)">
+            <mat-icon aria-hidden="false" aria-label="Delete User">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    </table>
+  </div>
+  <app-loading *ngIf="isLoading"></app-loading>
+</section>
+
+
+
