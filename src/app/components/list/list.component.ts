@@ -46,11 +46,12 @@ export class ListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       const userIndex = this.dataSource.data.indexOf(user);
-      this.dataSource.data[userIndex] = {
+      const users = [... this.dataSource.data];
+      users[userIndex] = {
         ...user,
         ...result,
       }
-
+      this.dataSource.data = users;
       this.table.renderRows();
     });
   }
@@ -62,9 +63,10 @@ export class ListComponent implements OnInit {
       if (!result) {
         return;
       }
+      const users = [... this.dataSource.data];
       const userIndex = this.dataSource.data.indexOf(user);
-      this.dataSource.data.splice(userIndex, 1)
-
+      users.splice(userIndex, 1);
+      this.dataSource.data = users;
       this.table.renderRows();
     });
   }
